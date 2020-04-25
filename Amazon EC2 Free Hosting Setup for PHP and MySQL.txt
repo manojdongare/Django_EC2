@@ -24,7 +24,7 @@ sudo ufw allow 8000
 python manage.py runserver 0.0.0.0:8000
 set AWS EC2 inbound as follows
 	Type        ~ protocol ~ Port range ~ Source
-	All traffic ~ all      ~ 065535     ~ custom 0.0.0.0/0
+	All traffic ~ all      ~ 0-65535    ~ custom 0.0.0.0/0
 gunicorn --bind 0.0.0.0:8000 myproject.wsgi
 deactivate (to come out of venv)
 sudo vim /etc/systemd/system/gunicorn.service
