@@ -1,0 +1,58 @@
+sudo apt-get install python-pip
+Open Postgresql terminal                                                // 2 2 2 2 2 0 0 0 0 () () () () () @ @ @ @ @ @
+	-create database
+	-set username & password (create role)
+	-set client_encoding -> 'utf8'
+	-set default transaction isolation -> read committed (alter role)
+	-set time zone -> UTC
+	-grant all privilages to database
+upgrade pip
+sudo apt install -y python3-venv
+mkdir myproject && cd myproject
+virtualenv myprojectenv
+source myprojectenv/bin/activate
+pip install django gunicorn psycopg2
+django-admin startproject myproject
+vim myproject/settings.py
+	-edit database settings
+	-add STATIC_ROOT=os.path.join(BASE_DIR,'/static') after STATIC_URL='/static'
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py collectionsstatistics
+sudo ufw allow 8000
+python manage.py runserver 0.0.0.0:8000
+set AWS EC2 inbound as follows
+	Type        ~ protocol ~ Port range ~ Source
+	All traffic ~ all      ~ 065535     ~ custom 0.0.0.0/0
+gunicorn --bind 0.0.0.0:8000 myproject.wsgi
+deactivate (to come out of venv)
+sudo vim /etc/systemd/system/gunicorn.service
+	.
+	.
+	.
+	.
+	.
+	.
+	.
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+sudo systemctl status gunicorn
+sudo journalctl -u gunicorn
+sudo systemctl daemon-reload
+sudo systemctl restart gunicorn
+sudo vim /etc/nginx/sites-available/myproject
+	.
+	.
+	.
+	.
+sudo ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled
+sudo nginx -t
+sudo systemctl restart nginx
+sudo ufw delete allow 8000
+sudo ufw allow 'Nginx Full'
+
+
+
+
+
