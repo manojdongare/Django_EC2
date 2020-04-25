@@ -1,5 +1,5 @@
 https://www.youtube.com/watch?v=Xlp9G137-MI
-
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
 
 sudo apt-get install python-pip
 Open Postgresql terminal                                                // 2 2 2 2 2 0 0 0 0 () () () () () @ @ @ @ @ @
